@@ -1,10 +1,7 @@
 # Webの基礎を学びながらReact Hooksでポートフォリオサイトを作ろう
-- https://www.techpit.jp/courses/194
 
-- 
 ## 環境構築
-- 以下の講座を使って環境構築を行う
-  - https://www.techpit.jp/courses/216
+
 
 ### 手順
 - Windows環境にWSL2(Ubuntu)をインストール
@@ -35,6 +32,3 @@ asdf plugin list
 asdf install nodejs {バージョン}
 ```
 
-# 参考サイト
-- Ubuntu の初期設定
-  - https://zenn.dev/nishiyama/articles/23d9e75352f3ce0bde52
