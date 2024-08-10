@@ -169,9 +169,120 @@
 - ES6
   - ECMAScript2015
   - 2015年誕生
+  - `let`,`const`、アロー関数導入
 - Babel
   - ES6をコンパイルするOSSツール
+### JavaScriptにおける変数の使い方
+- 定数
+  - staticなデータ(読み取り専用)に使用する
+  - 定数は大文字で宣言する
+    - 例：`const PI_NUM = 3.14;`
+- プリミティブデータ型
+  - オブジェクト以外のメソッドを持たないデータのこと
+    - Null、未定義(Undefined)、真偽値(Boolean)、数値（Number）、文字列（String）など
 
+### JavaScriptにおける関数の使い方
+- 関数
+  - 一連の決まった処理を抽象化したもの
+    - 何かしらの入力(引数) + 一連の処理 + 出力(return)
+  - camelCaseで記述する
+- アロー関数 `(arg) => `
+  - メリット
+    - 端的に書ける
+    - 呼び出す側に依存しにくい（バグを生みにくい）
+  - デメリット
+    - アロー関数で対応できない処理もあるため、常に使えるわけではない
+  - 複数行の場合、`{ return ... }`と記述する
+  - 1行の場合は処理のみを記述する
+- 配列操作
+  - 引数にNumber型を格納
+    - push
+    - pop
+    - length
+  - アロー関数を使用。引数には各要素の仮引数を定義
+    - map
+    - forEach
+    - find
+    - findIndex
+    - filter
+    - some
+
+### 非同期処理 Promise
+#### Promiseの概要
+- 非同期処理が正常に完了したこと、エラーが発生したことを検知するオブジェクト
+- ある処理A,B,Cがあったとき、A,B,Cを同時に処理する
+  - 同期処理の場合はA→B→Cの順番を担保したまま処理する
+- 使用例
+  - フロントからAPIを叩いてそのレスポンスの返り値に応じて後続の処理を変更する
+    - 非同期処理の結果を「成功」と「失敗」に分けて擬似的に同期的処理を作り出す
+
+#### Promiseの状態
+- pending: 結果を待っている状態(成功/失敗どちらでもない)
+- fulfilled: 処理が成功した状態
+- rejected: 処理が失敗した状態
+
+#### Promiseオブジェクトのインスタンスメソッド
+- then(成功時, 失敗時)
+  - 第一引数に成功時に呼ばれ、第二引数は失敗時に呼ばれる
+  - 引数は任意
+- catch()
+  - 失敗したとき「のみ」呼ばれる
+
+#### Promiseオブジェクトの基本的な使い方
+```js
+// APIが返ってくるまでの間後続の処理を待たせて、またAPIの返り値に応じて成功時、失敗時の処理をかき分ける
+asyncFunc(
+  // APIを叩く
+).then(
+  // 成功したら、その返り値(APIレスポンス)を画面に表示する
+).catch(
+  // APIが失敗したら、エラーがでたことを画面に表示する
+)
+```
+
+#### 例1 setTimeout()
+```js
+// A => C => B の順番に実行される
+console.log('A');
+setTimeout(() => {
+  console.log('B');
+}, 500);
+console.log('C');
+```
+
+### 例2 Promiseを使って処理を待つ
+```js
+function asyncFunc() {
+  return new Promise((resolve) => {
+    console.log('A1')
+    console.log('A2')
+    setTimeout(() => {
+      resolve('B');  // 成功時。'B'を返す
+      // reject(); // 失敗時。ここでreject()するとcatch()に入る
+    }, 500);
+  })
+};
+
+// A => 0.5秒待つ => B => C の順番に実行される
+asyncFunc().then((value) => { // A => 0.5秒待つ。resolveの中身を受け取る
+  console.log(value) // Bが返ってくる
+}).then(() => {
+  console.log('C')
+}).catch(() => {
+  // 成功するためここは通らない
+  console.error('Error!');
+});
+
+// A => 0.5秒待つ => Error! の順番に実行される
+asyncFunc().then((value) => { // A => 0.5秒待つ。resolveの中身を受け取る
+  hoge.log(value) // Bが返ってくるが、hoge.logなんてものはないため、エラーとなる
+}).then(() => {
+  // 失敗するためここは通らない
+  console.log('C')
+}).catch(() => {
+  console.error('Error!');
+});
+```
 
 ## 参考URL
 - HTTP レスポンスステータスコード
