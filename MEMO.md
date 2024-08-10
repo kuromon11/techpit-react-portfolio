@@ -2,7 +2,6 @@
 
 ## 環境構築
 
-
 ### 手順
 - Windows環境にWSL2(Ubuntu)をインストール
 - Gitとcurlをインストール
@@ -32,11 +31,53 @@
   - バージョン：18.17.0
 - GitHubと連携する
   - ssh -T git@github.com
+- Reactプロジェクト作成
+  - npx create-react-app <プロジェクト名>
+  - ※カレントディレクトリにプロジェクトを作成したい場合はプロジェクト名を`.`とする
 
 ### 次回以降の設定方法
 - git clone https://github.com/kuromon11/techpit-react-portfolio
 - cd techpit-react-portfolio
-- 
+
+
+## Reactプロジェクトのディレクトリ・ファイルについて
+### ディレクトリ
+- public
+  - index.html
+    - デプロイすることで、ユーザに公開されるファイル
+  - favicon（ファビコン）
+    - ブラウザのタブに表示される、Webサイトのシンボルマークやロゴのこと
+- src
+  - デフォルト
+    - App.js
+      - rootコンポーネント(Functional Component)
+      - 状態を持たず、子コンポーネントをいくつか含んでいるだけ
+    - index.js
+      - HTML上の`id=root`の要素に対してAppコンポーネントをレンダリングさせている
+    - App.css
+  - カスタム（PJTによる）
+    - components
+      - コンポーネントをいれていく
+    - reducers
+      - React Hooksの中でもreducerをいれる
+    - customHooks
+      - カスタムフックスだけをいれる
+    - images
+      - コンポーネントから参照する
+- node_modules ※触らない
+  - ローカル開発環境でのみ必要なもの
+  - 依存パッケージの実際のコードが記載されている
+
+### ファイル
+- README.md
+  - プロジェクトの概要を記載するドキュメントファイル
+  - プロジェクトの目的、使い方、注意事項などを記載する
+- package.json ※触らない
+  - 依存パッケージ(ライブラリなど)を管理
+  - そのプロジェクトがどんなライブラリなどを参照しているのかをひと目で確認できる
+- package-lock.json ※触らない
+  - package.jsonを元に自動生成・更新されるもの
+  - 全ての依存パッケージとその詳細が記載されている
 
 # 困ったとき
 
@@ -308,4 +349,7 @@ asdf install nodejs {バージョン}
 asdf global nodejs <バージョン>
 # nodejsをローカル設定（設定したいプロジェクトのルートディレクトリに移動して実行）
 asdf local nodejs <バージョン>
+
+# プロジェクト立ち上げ
+npm start
 ```
