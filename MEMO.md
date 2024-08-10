@@ -151,7 +151,27 @@
   - 非同期で行われた通信の一覧
 - 非同期通信
   - サーバーがHTMLを返し終わった(=画面に文章などが一部表示された)後、タイミングをずらしてコンテンツを取得すること
-- 
+
+## JavaScript基礎
+### JavaScriptの歴史・背景
+- 特徴
+  - JITコンパイラ(Just-In-Timeコンパイラ)
+    - プログラムの実行時にコンパイルされる
+  - オブジェクト指向言語
+    - プロトタイプベース
+      - `prototype`というオブジェクトを通じて「移譲」を行う
+      - 継承においてJSが持っている構成要素はオブジェクトだけ
+    - ※Javaはクラスベース
+      - クラスからインスタンスを生成して「移譲」を行う
+  - シングルスレッド（単一のスレッド）
+    - スレッド：プログラムの処理が実行される単位
+    - JSで書かれた処理は連続した一つのスレッドにまとめられ、順番を担保されながら実行される
+- ES6
+  - ECMAScript2015
+  - 2015年誕生
+- Babel
+  - ES6をコンパイルするOSSツール
+
 
 ## 参考URL
 - HTTP レスポンスステータスコード
@@ -160,6 +180,8 @@
   - https://developer.mozilla.org/ja/docs/Web/HTTP/Messages
 - HTTPの概要
   - https://developer.mozilla.org/ja/docs/Web/HTTP/Overview
+- 継承とプロトタイプチェーン
+  - https://developer.mozilla.org/ja/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
 
 # コマンド
 ```sh
