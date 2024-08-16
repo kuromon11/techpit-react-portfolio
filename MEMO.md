@@ -54,6 +54,20 @@
       - 状態を持たず、子コンポーネントをいくつか含んでいるだけ
     - index.js
       - HTML上の`id=root`の要素に対してAppコンポーネントをレンダリングさせている
+      - ファイルの構造
+        - import層
+          - 外部モジュールを読み込む
+          - モジュールの依存関係をわかりやすくするため、一番最初に記述する
+          - 現在のファイルからみて、外側のファイル・ライブラリ・パッケージなどを参照する
+          - 外部モジュールを参照する場合、importしたいモジュール内でexportする必要がある
+            - 自ファイル：`import {name} from 'module-name'`
+            - 外部：`export default {name};`
+        - レンダリング層
+          - JSXやそのラッパー(wrapper)を記述する
+          - `react-dom`から`ReactDOM`をimportし、`render()`関数を使うことで、与えられたDOMに対してReactの要素をレンダリングする
+          - `ReactDOM.render(reactElement, DOM);`
+            - 第一引数：Reactの要素
+            - 第二引数：対象のDOMに対してレンダリング
     - App.css
   - カスタム（PJTによる）
     - components
@@ -75,9 +89,14 @@
 - package.json ※触らない
   - 依存パッケージ(ライブラリなど)を管理
   - そのプロジェクトがどんなライブラリなどを参照しているのかをひと目で確認できる
+  - `scripts`にコマンドの定義をしている
+    - 例：`start`：reactプロジェクトを立ち上げる
 - package-lock.json ※触らない
   - package.jsonを元に自動生成・更新されるもの
   - 全ての依存パッケージとその詳細が記載されている
+
+### ローカルで立ち上げた時の使用
+- ファイルの内容を変更すれば、リロードしなくても、自動で反映される（Hot Reload）
 
 # 困ったとき
 
@@ -323,6 +342,60 @@ asyncFunc().then((value) => { // A => 0.5秒待つ。resolveの中身を受け�
 }).catch(() => {
   console.error('Error!');
 });
+```
+
+## コンポーネント
+### コンポーネントとは
+- 構成要素の一つ、部品で、有機的に結合している
+- PCのキーボードもコンポーネント
+- 全体のうちの一部分を構成している場合、コンポーネントと表現できる
+### Atomic Components
+- Atom：ボタン
+- Molecules
+  - 検索窓
+  - Atomの組み合わせ
+  - 汎用的
+    - 特定のプロダクト (Webサイト) についての知識(ドメイン知識)を持たず、それ単体で意味を成さない
+- Organisms
+  - バナー
+  - Atom, Molecules, Organismsの組み合わせ
+  - 限定的
+    - 特定のプロダクト (Webサイト) についての知識(ドメイン知識)を持ち、それ単体で意味を成す
+- Templates：ヘッダー、サイドメニュー
+- Pages：ページ全体
+- ※Atoms、Moleculesは抽象度を高くし、それ以降は抽象度を下げる
+- ※参考URL：https://atomicdesign.bradfrost.com/chapter-2/
+### Reactにおけるコンポーネント(関数コンポーネント)
+#### 特徴・仕様
+- コンポーネントの名前はpascal case(最初の始まりは大文字、以降の始まりも大文字)で定義する
+- 関数内で、JSXと呼ばれるDOMに対応する要素を返す
+- propsというオブジェクト(連想配列)を引数に受け取る
+#### 例
+```js
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+const Welcome = (props) => {
+  return <h1>Hello, {props.name}</h1>;
+}
+```
+- 要素の属性でkeyとvalueを定義することで、propsは連想配列となる
+```js
+const NameText = (props) => {
+  return (
+    <p>Hi, {props.name}!</p>
+  )
+}
+
+const App = () => {
+  return (
+    <div>
+      <NameText name="Jack">
+      <NameText name="Mary">
+    </div>
+  )
+}
 ```
 
 ## 参考URL
