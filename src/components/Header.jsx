@@ -5,7 +5,7 @@ export const Header = () => {
   // HTMLではなくJSXを返す
   return (
     <div className="test-wrapper">
-      <span>このコンポーネントの名前は{componentName}です。</span>
+      <span class="text">このコンポーネントの名前は{componentName}です。</span>
       {/* <span>このコンポーネントの名前は{componentName()}です。</span> */}
     </div>
   );
