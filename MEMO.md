@@ -409,6 +409,12 @@ const App = () => {
 - 最終的に要素を生成するJavaScriptが動いている
 ### JSXの作法
 - class属性は`className`とする
+- １つのJSXには１つの親要素しか含められない
+  - `Fragment`を使うことで、不要な要素を追加せずに、1つの親要素を定義できる
+  - `Fragment`の定義方法は以下の通り
+    - `<React.Fragment>...</React.Fragment>`
+    - `<>...</>`
+- 
 
 ## その他
 ### 相対パス
