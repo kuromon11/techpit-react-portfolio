@@ -47,6 +47,9 @@
     - デプロイすることで、ユーザに公開されるファイル
   - favicon（ファビコン）
     - ブラウザのタブに表示される、Webサイトのシンボルマークやロゴのこと
+  - images ※場合による
+    - 画像を格納するディレクトリ
+    - rootディレクトリやsrcディレクトリに配置することもある
 - src
   - デフォルト
     - App.js
@@ -370,6 +373,8 @@ asyncFunc().then((value) => { // A => 0.5秒待つ。resolveの中身を受け�
 - コンポーネントの名前はpascal case(最初の始まりは大文字、以降の始まりも大文字)で定義する
 - 関数内で、JSXと呼ばれるDOMに対応する要素を返す
 - propsというオブジェクト(連想配列)を引数に受け取る
+- コンポーネントは1ファイルにつき1つ
+- `components`のファイル名は大文字から始める
 #### 例
 ```js
 function Welcome(props) {
@@ -397,6 +402,22 @@ const App = () => {
   )
 }
 ```
+## JSX
+### JSXとは
+- 関数コンポーネントの中身(HTMLタグの集まり)のこと
+- コンポーネントはJSXを返す
+- 最終的に要素を生成するJavaScriptが動いている
+### JSXの作法
+- class属性は`className`とする
+
+## その他
+### 相対パス
+- `.`：現在のディレクトリ
+- `..`：１つ上のディレクトリ
+### よく使われるstyleライブラリ
+- [styled-components](https://github.com/styled-components/styled-components)
+- [tailwindcss](https://tailwindcss.com/)
+
 
 ## 参考URL
 - HTTP レスポンスステータスコード
