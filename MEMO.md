@@ -409,6 +409,12 @@ const App = () => {
 - 最終的に要素を生成するJavaScriptが動いている
 ### JSXの作法
 - class属性は`className`とする
+- １つのJSXには１つの親要素しか含められない
+  - `Fragment`を使うことで、不要な要素を追加せずに、1つの親要素を定義できる
+  - `Fragment`の定義方法は以下の通り
+    - `<React.Fragment>...</React.Fragment>`
+    - `<>...</>`
+- 
 
 ## その他
 ### 相対パス
@@ -417,7 +423,24 @@ const App = () => {
 ### よく使われるstyleライブラリ
 - [styled-components](https://github.com/styled-components/styled-components)
 - [tailwindcss](https://tailwindcss.com/)
-
+### ライブラリ使用時の注意点
+- まずはGitHubのサイトを確認する
+  - 個人投稿技術記事サイトの確認はできるだけ避けること
+- GitHubの中でのチェックポイント
+  - 自分たちの用途に適していて、かつメンテナンスがしっかりされているものを選ぶ
+    - Starがどれくらいついているか？
+    - 最終commitがどれくらい最近か？
+    - IssueやPull Requestが放置されていないか？
+    - READMEが丁寧に記載されているか？
+  - モンキーパッチ(ライブラリの変更に合わせてオリジナルコードに修正を加えること)防止
+- TypeScriptを採用している場合は型定義があるか？レガシーブラウザに対応しているか？も確認する
+- 利用用途にあったライブラリを複数検討したい場合は`npmtrends`で調査する
+  - https://npmtrends.com/
+- 何か新しいものを学ぶ時は公式のドキュメント、リファレンスを参照する
+### curlコマンド
+- curl：様々なプロトコルの通信を行うこと。cURL(client for URL)の略。
+- -I：エンドポイント(URL)のヘッダーの取得
+- -X：HTTPメソッド(GET,POST,PUT,DELETE)の指定
 
 ## 参考URL
 - HTTP レスポンスステータスコード

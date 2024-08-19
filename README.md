@@ -1,6 +1,10 @@
 # Webの基礎を学びながらReact Hooksでポートフォリオサイトを作ろう
 - https://www.techpit.jp/courses/194
 
+# 環境
+## 使用ライブラリ
+-  [react-icons](https://github.com/react-icons/react-icons)
+
 # 参考サイト
 - Techpit教材 環境構築について
   - https://www.techpit.jp/courses/216
@@ -10,6 +14,8 @@
   - https://zenn.dev/hayato94087/articles/a2bde47e14840a
 - 一歩先ゆくバージョン管理 asdfの活用法
   - https://zenn.dev/hongmuchan/articles/4cecb2e090947a
+- GitHubのREST API - GitHub Docs
+  - https://docs.github.com/ja/rest
 
 
 # Getting Started with Create React App
