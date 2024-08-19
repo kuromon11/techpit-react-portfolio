@@ -436,6 +436,11 @@ const App = () => {
 - TypeScriptを採用している場合は型定義があるか？レガシーブラウザに対応しているか？も確認する
 - 利用用途にあったライブラリを複数検討したい場合は`npmtrends`で調査する
   - https://npmtrends.com/
+- 何か新しいものを学ぶ時は公式のドキュメント、リファレンスを参照する
+### curlコマンド
+- curl：様々なプロトコルの通信を行うこと。cURL(client for URL)の略。
+- -I：エンドポイント(URL)のヘッダーの取得
+- -X：HTTPメソッド(GET,POST,PUT,DELETE)の指定
 
 ## 参考URL
 - HTTP レスポンスステータスコード
