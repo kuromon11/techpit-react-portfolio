@@ -1,6 +1,10 @@
 # Webの基礎を学びながらReact Hooksでポートフォリオサイトを作ろう
 - https://www.techpit.jp/courses/194
 
+# 環境
+## 使用ライブラリ
+-  [react-icons](https://github.com/react-icons/react-icons)
+
 # 参考サイト
 - Techpit教材 環境構築について
   - https://www.techpit.jp/courses/216
