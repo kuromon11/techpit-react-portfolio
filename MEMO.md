@@ -47,6 +47,9 @@
     - デプロイすることで、ユーザに公開されるファイル
   - favicon（ファビコン）
     - ブラウザのタブに表示される、Webサイトのシンボルマークやロゴのこと
+  - images ※場合による
+    - 画像を格納するディレクトリ
+    - rootディレクトリやsrcディレクトリに配置することもある
 - src
   - デフォルト
     - App.js
@@ -399,15 +402,22 @@ const App = () => {
   )
 }
 ```
+## JSX
 ### JSXとは
 - 関数コンポーネントの中身(HTMLタグの集まり)のこと
 - コンポーネントはJSXを返す
 - 最終的に要素を生成するJavaScriptが動いている
+### JSXの作法
+- class属性は`className`とする
 
 ## その他
 ### 相対パス
 - `.`：現在のディレクトリ
 - `..`：１つ上のディレクトリ
+### よく使われるstyleライブラリ
+- [styled-components](https://github.com/styled-components/styled-components)
+- [tailwindcss](https://tailwindcss.com/)
+
 
 ## 参考URL
 - HTTP レスポンスステータスコード
