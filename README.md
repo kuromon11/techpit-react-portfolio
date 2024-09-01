@@ -4,6 +4,7 @@
 # 環境
 ## 使用ライブラリ
 -  [react-icons](https://github.com/react-icons/react-icons)
+-  [axios](https://github.com/axios/axios)
 
 # 参考サイト
 - Techpit教材 環境構築について

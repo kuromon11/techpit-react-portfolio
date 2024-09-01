@@ -414,7 +414,51 @@ const App = () => {
   - `Fragment`の定義方法は以下の通り
     - `<React.Fragment>...</React.Fragment>`
     - `<>...</>`
+## マウントとレンダリング
+### 各用語
+- マウント
+  - DOMツリーにReactコンポーネント(DOM)を挿入するための一連の処理
+    - オブジェクトの生成からDOM要素への挿入まで
+    - 要素の「表示(=レンダリング)」は必ずしも含まれない
+- アンマウント
+  - DOMツリーからDOMを削除すること
+- レンダリング
+  - ステート(state)やプロップス(props)を読み込み、コンポーネントをDOMツリーに挿入する処理
+  - レンダリングの順番
+    - 1.レンダー(描画)
+    - 2.コミット
+  - マウント => レンダリング => 再レンダリング
+### その他用語
+- DOMツリー
+  - DOM要素(element)がツリー上に連なり存在しているオブジェクトの集合体
+### 流れ
+- render() => React.createElementの引数 => JavaScriptオブジェクトが生成
+  - Reactコンポーネント = JavaScriptオブジェクト
+- DOMツリーにJavaScriptオブジェクトを挿入することで、JavaScriptオブジェクトを画面に表示
+### 例
+- マウントについて
+```js
+// React すべてのJSXにおける糖衣構文
+const child = <Child />;
+// JavaScriptの場合
+const child = React.createElement(FooComponent);
+// DOMツリーへの挿入
+ReactDOM.render(
+  child,
+  document.getElementById('root')
+);
+```
+## React関数
+### useEffect(関数, 配列)
+- 第一引数
+  - コンポーネントのレンダリング後に一度実行
+  - 第二引数を定義した場合、第二引数内（依存先）のステートが変わったときにのみその関数を実行
+- 第二引数
+  - 依存先
+  - 空配列の場合、コンポーネントの最初のレンダリング時に一度だけ関数を実行
+    - 「xが変わったときに関数を実行する」のxが存在しない状態となり、いつまでも待ち続ける
 - 
+
 
 ## その他
 ### 相対パス
@@ -451,6 +495,8 @@ const App = () => {
   - https://developer.mozilla.org/ja/docs/Web/HTTP/Overview
 - 継承とプロトタイプチェーン
   - https://developer.mozilla.org/ja/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
+- Reactライフサイクル
+  - https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
 # コマンド
 ```sh
