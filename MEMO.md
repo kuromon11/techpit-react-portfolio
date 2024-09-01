@@ -454,8 +454,6 @@ ReactDOM.render(
 );
 ```
 
-## 
-
 ## React関数
 ### useEffect(関数, 配列)
 - 第一引数
@@ -471,6 +469,9 @@ ReactDOM.render(
   - 1：ステート、2：ステートを更新する関数
 - ステートは直接変更してはいけない
 
+### useReducer
+- useStateと同様初期化が必要
+- 返り値：[state, dispatch]
 
 ## その他
 ### 相対パス
@@ -497,6 +498,17 @@ ReactDOM.render(
 - curl：様々なプロトコルの通信を行うこと。cURL(client for URL)の略。
 - -I：エンドポイント(URL)のヘッダーの取得
 - -X：HTTPメソッド(GET,POST,PUT,DELETE)の指定
+### Presentational/Container Component
+#### 種類
+- Presentational Component：純粋な見た目だけのもの。それ自体にデータを含まないもの。
+- Container Component：データを取得、更新、整形するロジックを含むもの。
+#### 分ける理由
+- コンポーネントの再利用性
+  - Presentational Componentはデータを(ほとんど)持たないため、様々な文脈で再利用できる
+    - 親コンポーネントからprops経由でデータを受け取り表示するだけで良い
+  - Container Componentは再利用が難しい
+- Fluxアーキテクチャとの相性
+  - データの方向は原則「一方向」であるべき
 
 ## 参考URL
 - HTTP レスポンスステータスコード
