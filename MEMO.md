@@ -472,6 +472,9 @@ ReactDOM.render(
 ### useReducer
 - useStateと同様初期化が必要
 - 返り値：[state, dispatch]
+- reducer関数は引数を2つ受け取る
+  - 第一引数：state
+  - 第二引数：action
 
 ## その他
 ### 相対パス
@@ -509,6 +512,9 @@ ReactDOM.render(
   - Container Componentは再利用が難しい
 - Fluxアーキテクチャとの相性
   - データの方向は原則「一方向」であるべき
+### スプレッド構文
+- 配列式や文字列などの反復可能オブジェクトを、引数 (関数の場合) や要素 (配列の場合) を期待された場所で展開する
+- https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Spread_syntax
 
 ## 参考URL
 - HTTP レスポンスステータスコード
