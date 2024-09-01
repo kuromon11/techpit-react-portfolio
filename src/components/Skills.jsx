@@ -1,10 +1,14 @@
 import { useEffect, useReducer } from 'react';
 import axios from 'axios';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+
 import {
   skillReducer,
   initialState,
   actionTypes,
 } from '../reducers/skillReducer';
+import { requestStates } from '../constants';
 
 // 特定のユーザーのリポジトリ一覧を取得するエンドポイント
 const URL = 'https://api.github.com/users/kuromon11/repos';
@@ -46,13 +50,44 @@ export const Skills = () => {
     });
   };
 
+  // 各言語のパーセンテージを返す。5つ以上の場合は100とする。
+  const convertCountToPercentage = (count) => (count > 5 ? 100 : count * 20);
+
+  // プログラミング言語のパーセンテージを数の降順に並び替える
+  const sortedLanguageList = () =>
+    state.languageList.sort(
+      (firstLang, nextLang) => nextLang.count - firstLang.count
+    );
+
   return (
     <div id="skills">
       <div className="container">
         <div className="heading">
           <h2>Skills</h2>
         </div>
-        <div className="skills-container" />
+        <div className="skills-container">
+          {/* 現在のステートがローディング中 */}
+          {state.requestState === requestStates.loading && (
+            <p className="description">取得中...</p>
+          )}
+          {/* 成功時 */}
+          {state.requestState === requestStates.success &&
+            sortedLanguageList().map((item) => (
+              <div className="skill-item" key={item.language}>
+                <p className="description">
+                  <strong>{item.language}</strong>
+                </p>
+                <CircularProgressbar
+                  value={convertCountToPercentage(item.count)}
+                  text={`${convertCountToPercentage(item.count)}%`}
+                />
+              </div>
+            ))}
+          {/* エラー発生時 */}
+          {state.requestState === requestStates.error && (
+            <p className="description">エラーが発生しました</p>
+          )}
+        </div>
       </div>
     </div>
   );
