@@ -1,19 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import axios from 'axios';
+import {
+  skillReducer,
+  initialState,
+  actionTypes,
+} from '../reducers/skillReducer';
 
 // 特定のユーザーのリポジトリ一覧を取得するエンドポイント
 const URL = 'https://api.github.com/users/kuromon11/repos';
 
 export const Skills = () => {
-  const [languageList, setLanguageList] = useState([]);
-  console.log(languageList);
+  const [state, dispatch] = useReducer(skillReducer, initialState);
 
   useEffect(() => {
-    axios.get(URL).then((response) => {
-      const languageList = response.data.map((res) => res.language);
-      const countedLanguageList = generateLanguageCountObj(languageList);
-      setLanguageList(countedLanguageList);
-    });
+    dispatch({ type: actionTypes.fetch });
+    axios
+      .get(URL)
+      .then((response) => {
+        const languageList = response.data.map((res) => res.language);
+        const countedLanguageList = generateLanguageCountObj(languageList);
+        dispatch({
+          type: actionTypes.success,
+          payload: { languageList: countedLanguageList },
+        });
+      })
+      .catch(() => {
+        dispatch({ type: actionTypes.error });
+      });
   }, []);
 
   const generateLanguageCountObj = (allLanguageList) => {
