@@ -414,7 +414,85 @@ const App = () => {
   - `Fragment`の定義方法は以下の通り
     - `<React.Fragment>...</React.Fragment>`
     - `<>...</>`
-- 
+## マウントとレンダリング
+### 各用語
+- マウント
+  - DOMツリーにReactコンポーネント(DOM)を挿入するための一連の処理
+    - オブジェクトの生成からDOM要素への挿入まで
+    - 要素の「表示(=レンダリング)」は必ずしも含まれない
+- アンマウント
+  - DOMツリーからDOMを削除すること
+- レンダリング
+  - ステート(state)やプロップス(props)を読み込み、コンポーネントをDOMツリーに挿入する処理
+  - レンダリングの順番
+    - 1.レンダー(描画)
+    - 2.コミット
+  - マウント => レンダリング => 再レンダリング
+  - データが変わったり、親が再レンダリングすることで親・子も再評価され、もれなく画面が描画され直される
+### その他用語
+- DOMツリー
+  - DOM要素(element)がツリー上に連なり存在しているオブジェクトの集合体
+- 差分検出処理
+  - 必要に応じて、新たな仮想DOM(仮想上のDOMのこと)を構築し直す処理
+- レンダリング
+  - 必要に応じて、新たな仮想DOMを構築する作業
+### 流れ
+- render() => React.createElementの引数 => JavaScriptオブジェクトが生成
+  - Reactコンポーネント = JavaScriptオブジェクト
+- DOMツリーにJavaScriptオブジェクトを挿入することで、JavaScriptオブジェクトを画面に表示
+### 例
+- マウントについて
+```js
+// React すべてのJSXにおける糖衣構文
+const child = <Child />;
+// JavaScriptの場合
+const child = React.createElement(FooComponent);
+// DOMツリーへの挿入
+ReactDOM.render(
+  child,
+  document.getElementById('root')
+);
+```
+
+## React関数
+### useEffect(関数, 配列)
+- 第一引数
+  - コンポーネントのレンダリング後に一度実行
+  - 第二引数を定義した場合、第二引数内（依存先）のステートが変わったときにのみその関数を実行
+- 第二引数
+  - 依存先
+  - 空配列の場合、コンポーネントの最初のレンダリング時に一度だけ関数を実行
+    - 「xが変わったときに関数を実行する」のxが存在しない状態となり、いつまでも待ち続ける
+
+### useState(タプル)
+- タプル
+  - 1：ステート、2：ステートを更新する関数
+- ステートは直接変更してはいけない
+
+### useReducer
+- useStateと同様初期化が必要
+- 返り値：[state, dispatch]
+- reducer関数は引数を2つ受け取る
+  - 第一引数：state
+  - 第二引数：action
+
+## カスタムフックス
+- カスタマイズされたフックスを実装者が独自に作成する
+- 一般的に`use...`で始める
+- カスタムフックスを使用例
+  - 汎用性のあるロジックをカスタムフックスに分離し、Viewとロジックを分ける
+    - コードの見通しを良くし、再利用性を高めるため
+- 関数やデータを返すだけでなく、JSXそのものを返すことができる
+  - コンポーネントとして定義するほどでもない、かつロジックに依存するViewがある場合に有効
+
+## React作法
+### MUST
+### SHOULD
+- 配列から似たような要素を複数生成する場合、keyというpropsに「ユニークな値」を渡す
+  - それぞれの要素を一意に識別するため
+  - idを使用できるならidが望ましい
+  - idを使用できないならばindexを使用する
+    - indexは並び替えなどによって変わる可能性があるため
 
 ## その他
 ### 相対パス
@@ -441,6 +519,20 @@ const App = () => {
 - curl：様々なプロトコルの通信を行うこと。cURL(client for URL)の略。
 - -I：エンドポイント(URL)のヘッダーの取得
 - -X：HTTPメソッド(GET,POST,PUT,DELETE)の指定
+### Presentational/Container Component
+#### 種類
+- Presentational Component：純粋な見た目だけのもの。それ自体にデータを含まないもの。
+- Container Component：データを取得、更新、整形するロジックを含むもの。
+#### 分ける理由
+- コンポーネントの再利用性
+  - Presentational Componentはデータを(ほとんど)持たないため、様々な文脈で再利用できる
+    - 親コンポーネントからprops経由でデータを受け取り表示するだけで良い
+  - Container Componentは再利用が難しい
+- Fluxアーキテクチャとの相性
+  - データの方向は原則「一方向」であるべき
+### スプレッド構文
+- 配列式や文字列などの反復可能オブジェクトを、引数 (関数の場合) や要素 (配列の場合) を期待された場所で展開する
+- https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Spread_syntax
 
 ## 参考URL
 - HTTP レスポンスステータスコード
@@ -451,6 +543,8 @@ const App = () => {
   - https://developer.mozilla.org/ja/docs/Web/HTTP/Overview
 - 継承とプロトタイプチェーン
   - https://developer.mozilla.org/ja/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
+- Reactライフサイクル
+  - https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
 # コマンド
 ```sh
